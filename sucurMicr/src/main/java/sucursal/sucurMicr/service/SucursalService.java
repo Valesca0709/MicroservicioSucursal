@@ -24,7 +24,7 @@ public class SucursalService {
         return sucursalRepository.findById(id);
     }
     
-    // Crear o actualizar un producto
+    // Crear
     public Sucursal save(Sucursal sucursal) {
         return sucursalRepository.save(sucursal);
     }
@@ -35,9 +35,9 @@ public class SucursalService {
     }
     
     // Actualizar solo el stock
-    public Sucursal actualizarSucursal(int id, String nombre, String direccion, String telefono, String region) {
+    public Sucursal actualizarSucursal(int id, String nombre, String direccion, String telefono, String region, String ciudad) {
     Optional<Sucursal> sucursalOpt = sucursalRepository.findById(id);
-    
+
     if (sucursalOpt.isEmpty()) {
         return null; // No se encontró el usuario
     }
@@ -47,8 +47,8 @@ public class SucursalService {
     sucursal.setDireccion(direccion);
     sucursal.setTelefono(telefono);
     sucursal.setRegion(region);
+    sucursal.setCiudad(ciudad);
 
       return sucursalRepository.save(sucursal);
-        }
-
     }
+  } 

@@ -52,7 +52,6 @@ public class SucursalController {
         }
     }
 
-
     //que sea haga un update de los datos
     @PutMapping("/{id}")
     public ResponseEntity<Sucursal> actualizarSucursal(
@@ -60,9 +59,10 @@ public class SucursalController {
             @RequestParam String nombre,
             @RequestParam String direccion,
             @RequestParam String telefono,
-            @RequestParam String region) {
+            @RequestParam String region,
+            @RequestParam String ciudad) {
 
-        Sucursal actualizado = sucursalService.actualizarSucursal(id, nombre, direccion, telefono, region);
+        Sucursal actualizado = sucursalService.actualizarSucursal(id, nombre, direccion, telefono, region, ciudad);
 
         if (actualizado == null) {
             return ResponseEntity.notFound().build(); 
