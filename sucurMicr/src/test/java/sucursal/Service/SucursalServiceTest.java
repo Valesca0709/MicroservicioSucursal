@@ -16,7 +16,6 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -47,12 +46,12 @@ public class SucursalServiceTest {
 
   @Test
     void testGuardarSucursal() {
-        Sucursal sucursal = new Sucursal( 
-            1, 
+        Sucursal sucursal = new Sucursal( 1, 
             "Sucursal1", 
             "Las Condes 123", 
             "12345", 
             "Las Condes", 
+            true,
             "Metropolitana");
         Sucursal sucursalGuardada = new Sucursal(
              1, 
@@ -60,6 +59,7 @@ public class SucursalServiceTest {
             "Las Condes 123", 
             "12345", 
             "Las Condes", 
+            true,
             "Metropolitana");
             
 
@@ -82,13 +82,15 @@ public class SucursalServiceTest {
             "Las Condes 123", 
             "12345", 
             "Las Condes", 
+            true,
             "Metropolitana");
     Sucursal s2 = new Sucursal( 
             2, 
              "Sucursal2", 
              "Freire 123", 
              "123456", 
-             "Concepción", 
+            "Concepción", 
+            true,
              "Bío-Bío");
 
     when(sucursalRepository.findAll()).thenReturn(Arrays.asList(s1,s2));
@@ -119,6 +121,7 @@ void testListarSucursal_Vacia() {
             "Barros123", 
             "12345", 
             "Concepcion", 
+            true,
             "Concepcion");
 
         when(sucursalRepository.findById(sucursalId)).thenReturn(Optional.of(suc1)); // lo busca por el id
@@ -167,6 +170,7 @@ void actualizarSucursal() {
         "Barros123",
         "12345", 
         "Concepcion",
+        true,
         "Concepcion"
         );
 
@@ -176,6 +180,7 @@ void actualizarSucursal() {
     "ColoColo123", 
     "123456", 
     "Valpo", 
+    true,
     "Valpo"
     );
 

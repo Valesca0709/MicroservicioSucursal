@@ -57,7 +57,8 @@ void testFindByIdProductoAndIdSucursal() {
     when(productoSucursalRepository.findByIdProductoAndIdSucursal(idProducto, idSucursal))
         .thenReturn(List.of(ps));
 
-    List<ProductoSucursal> resultado = productoSucursalService.findByIdProductoAndIdSucursal(idProducto, idSucursal);
+    List<ProductoSucursal> resultado =
+     productoSucursalService.findByIdProductoAndIdSucursal(idProducto, idSucursal);
 
     assertFalse(resultado.isEmpty());
     assertEquals(1, resultado.size());

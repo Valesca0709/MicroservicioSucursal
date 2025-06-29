@@ -34,8 +34,10 @@ public class Sucursal {
     
     @Column(length = 100, nullable = false)
     private String ciudad;
-    
+
+    @Column(nullable = false)
+    private boolean activa;
+
     @Column(length = 50, nullable = false)
     private String region;
-
 }
