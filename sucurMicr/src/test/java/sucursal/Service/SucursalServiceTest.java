@@ -225,4 +225,12 @@ void actualizarSucursal_NoExiste_devuelveNull() {
     verify(sucursalRepository, times(1)).findById(idInvalido);
     verify(sucursalRepository, never()).save(any());
    }
+
+ 
+    @Test
+    void testDelete() {
+        int id = 1;
+        sucursalService.deleteById(id);
+        verify(sucursalRepository, times(1)).deleteById(id);
+    }
 }

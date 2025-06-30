@@ -21,7 +21,6 @@ public class ProductoSucursalController {
     @Autowired
     private ProductoSucursalService productoSucursalService;
 
-
     //Listar sucursal en el que aparece el producto y la sucursal en el que se encuentra el producto
    @GetMapping
     public ResponseEntity<List<ProductoSucursal>> getAllProductosSucursal() {
@@ -38,7 +37,7 @@ public class ProductoSucursalController {
             @RequestParam int idProducto,
             @RequestParam int idSucursal) {
         
-        List<ProductoSucursal> resultados = productoSucursalService.findByIdProductoAndIdSucursal(idProducto, idSucursal);
+    List<ProductoSucursal> resultados = productoSucursalService.findByIdProductoAndIdSucursal(idProducto, idSucursal);
         
         if (resultados.isEmpty()) {
             return ResponseEntity.noContent().build();

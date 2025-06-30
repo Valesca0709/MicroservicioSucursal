@@ -1,6 +1,7 @@
 package sucursal.sucurMicr.Controller;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import sucursal.sucurMicr.controller.SucursalController;
@@ -22,7 +24,7 @@ import sucursal.sucurMicr.service.SucursalService;
 @WebMvcTest(SucursalController.class)
 public class SucursalControllerTest {
 
-     @Autowired
+    @Autowired
     private MockMvc mockMvc;
 
     @SuppressWarnings("removal")
@@ -92,6 +94,15 @@ public class SucursalControllerTest {
                 .andExpect(jsonPath("$[2].activa").value(true));
     }
 
+
+    @Test
+    void testGetSucursal_NoContent() throws Exception {
+        when(sucursalService.findAll()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/v1/sucursal"))
+                .andExpect(status().isNoContent());
+    }
+
     @Test
     void testCrearSucursal() throws Exception {
         Sucursal nueva = new Sucursal (
@@ -126,6 +137,20 @@ public class SucursalControllerTest {
                 .andExpect(jsonPath("$.activa").value(true));
     } 
 
+     @Test
+    void testCreateSucursal_InternalServerError() throws Exception {
+        Sucursal sucursal = new Sucursal();
+        sucursal.setNombre("Sucursal Test");
+        sucursal.setDireccion("Dirección Test");
+
+        when(sucursalService.save(any(Sucursal.class))).thenThrow(new RuntimeException("Error simulado"));
+
+        mockMvc.perform(post("/api/v1/sucursal")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(sucursal)))
+                .andExpect(status().isInternalServerError());
+    }
+
 
     @Test
     void testGetSucursalById_Found() throws Exception {
@@ -148,7 +173,7 @@ public class SucursalControllerTest {
             .andExpect(jsonPath("$.ciudad").value("Concepción"))
             .andExpect(jsonPath("$.region").value("Bio-Bio"))
             .andExpect(jsonPath("$.activa").value(true));
-       }
+    }
 
 
     @Test

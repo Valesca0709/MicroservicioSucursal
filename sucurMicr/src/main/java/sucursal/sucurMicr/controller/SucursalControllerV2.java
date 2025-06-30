@@ -51,7 +51,7 @@ public class SucursalControllerV2 {
 
 
     @PostMapping(produces = MediaTypes.HAL_JSON_VALUE)
-    public ResponseEntity<EntityModel<Sucursal>> createCarrera(@RequestBody Sucursal sucursal) {
+    public ResponseEntity<EntityModel<Sucursal>> createSucursal(@RequestBody Sucursal sucursal) {
         Sucursal newSucursal = sucursalService.save(sucursal);
         return ResponseEntity
                 .created(linkTo(methodOn(SucursalControllerV2.class).getSucursalById(newSucursal.getIdSucursal())).toUri())
